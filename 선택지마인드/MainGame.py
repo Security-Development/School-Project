@@ -61,7 +61,7 @@ def setStory(number):
         root = number
 
 def Story(storyRoot):
-    global end, index, onScreen, stime, sOn
+    global end, index, onScreen, stime, sOn, onOff
     if Utils.getFirstLen(storyRoot) + 1 > index:  
         Draw.addText(view, Utils.getFirst(storyRoot, index)[0], 20, (255,250,255), 120, 405)
         Draw.addText(view, Utils.getFirst(storyRoot, index)[1], 20, (255,250,255), 120, 430)
@@ -79,29 +79,31 @@ def Story(storyRoot):
     if Utils.isFinish(storyRoot, index):
             Ending.endOnOff()
             sOn = True
+            onOff = False
 
     if sOn:
-        if stime == 20* 2:
                 
-            onScreen = False
-        stime += 1
+        onScreen = False
 
 
 while True:
     time.Clock().tick(20)
     view.fill(WHITE)
-    view.blit(pygame.image.load('./resource/House.jfif'), (-400, -250))
+
+    if root == 0:
+        view.blit(pygame.image.load('./resource/House.jfif'), (-400, -250))
+        Story('story')
+    elif root == 1:
+        view.blit(pygame.image.load('./resource/Forest.png'), (-80, -250))
+        Story('first')
+    elif root == -1:
+        view.blit(pygame.image.load('./resource/Forest.png'), (-80, -250))
+        Story('two')
 
     if onScreen:
         Draw.addImage(view, './resource/chatBox.png', -90, 30, 1300, 700)
         Draw.addText(view, 'Áú¹®ÀÚ', 30, (255,250,255), 180, 340)
 
-        if root == 0:
-            Story('story')
-        elif root == 1:
-            Story('first')
-        elif root == -1:
-            Story('two')
             
     GameEvent.onClickEvent(addIndex, setIndex, reverseOnOff, setStory, sOn)
     GameEvent.onQuitEvent()
@@ -115,7 +117,7 @@ while True:
         Ending.end(view)
 
     if end:
-        endOnOff()
+        Ending.endOnOff()
         onScreen = False
         
     

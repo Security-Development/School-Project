@@ -18,6 +18,6 @@ def end(view):
         if 19 > index:
             index +=1
         
-        Draw.addText(view, text[:index], 40, (255,250,255), 440, 200)
+        Draw.addText(view, text[:index], 40, (240,86,80), 440, 200)
             
 

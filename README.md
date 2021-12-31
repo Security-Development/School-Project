@@ -1,2 +1,2 @@
 # School-Project
-안녕
+대화형 게임
